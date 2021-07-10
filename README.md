@@ -1,0 +1,1 @@
+# cordova-plugin-braintree-popup-bridge
