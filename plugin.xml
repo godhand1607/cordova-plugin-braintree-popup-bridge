@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+-->
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:rim="http://www.blackberry.com/ns/widgets"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="cordova-plugin-popup-bridge"
+    version="1.0.0">
+    <name>PopupBridge Plugin</name>
+    <description>Cordova Braintree PopupBridge</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,device</keywords>
+    <repo>https://github.com/paypal/integration-packs/tree/main/popupbridge-samples/cordova-plugin-popup-bridge</repo>
+    <issue>https://github.com/paypal/integration-packs/issues</issue>
+
+    <js-module src="www/popup-bridge.js" name="popup-bridge">
+        <clobbers target="popup-bridge" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="PopupBridge">
+                <param name="android-package" value="org.apache.cordova.popupbridge.PopupBridgePlugin"/>
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/PopupBridgePlugin.java" target-dir="src/org/apache/cordova/popupbridge" />
+
+        <config-file target="config.xml" parent="/*">
+            <preference name="android-minSdkVersion" value="21" tools:overrideLibrary="com.braintreepayments.popupbridge" />
+        </config-file>
+
+        <framework src="com.braintreepayments:popup-bridge:1.+" />
+
+        <config-file target="AndroidManifest.xml" parent="application">
+            <activity android:name="com.braintreepayments.popupbridge.PopupBridgeActivity"
+                      android:launchMode="singleTask">
+                <intent-filter>
+                    <action android:name="android.intent.action.VIEW" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                    <category android:name="android.intent.category.BROWSABLE" />
+                    <data android:scheme="${applicationId}.popupbridge" />
+                </intent-filter>
+            </activity>
+        </config-file>
+
+        <!-- Whitelist Chrome for API 30 -->
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <queries>
+                <package android:name="com.android.chrome" />
+            </queries>
+        </config-file>
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="PopupBridge">
+                <param name="ios-package" value="CDVPopupBridgePlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/CDVPopupBridgePlugin.h" />
+        <source-file src="src/ios/CDVPopupBridgePlugin.m" />
+
+
+        <!-- Popup Bridge -->
+        <header-file src="src/ios/AppDelegate+PopupBridge.h" />
+        <source-file src="src/ios/AppDelegate+PopupBridge.m" />
+
+        <header-file src="src/ios/POPPopUpBridge.h" />
+        <source-file src="src/ios/POPPopUpBridge.m" />
+        <header-file src="src/ios/POPWeakScriptMessageDelegate.h" />
+        <source-file src="src/ios/POPWeakScriptMessageDelegate.m" />
+
+        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+            <array>
+                <dict>
+                    <key>CFBundleTypeRole</key>
+                    <string>Editor</string>
+                    <key>CFBundleURLName</key>
+                    <string></string>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+                        <string>$PACKAGE_NAME.popupbridge</string>
+                    </array>
+                </dict>
+            </array>
+        </config-file>
+
+    </platform>
+</plugin>
+
