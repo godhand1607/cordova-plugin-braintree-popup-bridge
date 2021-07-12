@@ -21,14 +21,14 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:rim="http://www.blackberry.com/ns/widgets"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    id="cordova-plugin-popup-bridge"
+    id="cordova-plugin-braintree-popup-bridge"
     version="1.0.0">
-    <name>PopupBridge Plugin</name>
+    <name>Braintree PopupBridge Plugin</name>
     <description>Cordova Braintree PopupBridge</description>
     <license>Apache 2.0</license>
     <keywords>cordova,device</keywords>
-    <repo>https://github.com/paypal/integration-packs/tree/main/popupbridge-samples/cordova-plugin-popup-bridge</repo>
-    <issue>https://github.com/paypal/integration-packs/issues</issue>
+    <repo>https://github.com/godhand1607/cordova-plugin-braintree-popup-bridge</repo>
+    <issue>https://github.com/godhand1607/cordova-plugin-braintree-popup-bridge/issues</issue>
 
     <js-module src="www/popup-bridge.js" name="popup-bridge">
         <clobbers target="popup-bridge" />

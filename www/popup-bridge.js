@@ -45,7 +45,7 @@ function PopupBridge () {
             },
             function (e) {
                 me.available = false;
-                console.error('[ERROR] Error initializing cordova-plugin-popup-bridge: ' + e);
+                console.error('[ERROR] Error initializing cordova-plugin-braintree-popup-bridge: ' + e);
             }
         );
     });
