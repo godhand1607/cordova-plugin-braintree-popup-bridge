@@ -1,0 +1,29 @@
+{
+    "name": "cordova-plugin-braintree-popup-bridge",
+    "version": "1.0.0",
+    "description": "Cordova Braintree PopupBridge",
+    "cordova": {
+      "id": "cordova-plugin-braintree-popup-bridge",
+      "platforms": [
+        "android",
+        "ios"
+      ]
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/godhand1607/cordova-plugin-braintree-popup-bridge"
+    },
+    "keywords": [
+      "cordova",
+      "device",
+      "ecosystem:cordova",
+      "cordova-android",
+      "cordova-ios"
+    ],
+    "author": "",
+    "license": "Apache 2.0"
+}
