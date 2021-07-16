@@ -28,9 +28,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.braintreepayments.popupbridge.PopupBridge;
+// import com.braintreepayments.popupbridge.PopupBridge;
+import com.braintreepayments.api.PopupBridgeClient;
 import android.provider.Settings;
 import android.webkit.WebView;
+import androidx.fragment.app.FragmentActivity;
 
 public class PopupBridgePlugin extends CordovaPlugin {
     public static final String TAG = "PopupBridge";
@@ -53,7 +55,8 @@ public class PopupBridgePlugin extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
 
-        PopupBridge.newInstance(cordova.getActivity(), (WebView) webView.getEngine().getView());
+        // PopupBridge.newInstance(cordova.getActivity(), (WebView) webView.getEngine().getView());
+        new PopupBridgeClient((FragmentActivity) cordova.getActivity(), (WebView) webView.getEngine().getView(), "");
     }
 
     /**
