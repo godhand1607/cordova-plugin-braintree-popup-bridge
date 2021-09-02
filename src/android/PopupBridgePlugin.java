@@ -28,21 +28,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.braintreepayments.popupbridge.PopupBridge;
-// import com.braintreepayments.api.PopupBridgeClient;
+// import android.app.AlertDialog;
+
+// import com.braintreepayments.popupbridge.PopupBridge;
+import com.braintreepayments.api.PopupBridgeClient;
 import android.provider.Settings;
 import android.webkit.WebView;
-// import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentActivity;
 
 public class PopupBridgePlugin extends CordovaPlugin {
     public static final String TAG = "PopupBridge";
-    // private PopupBridge mPopupBridge;
+    private PopupBridgeClient mPopupBridgeClient;
 
     /**
      * Constructor.
      */
-    public PopupBridgePlugin() {
-    }
+    public PopupBridgePlugin() { }
 
     /**
      * Sets the context of the Command. This can then be used to do things like
@@ -55,9 +56,28 @@ public class PopupBridgePlugin extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
 
-        PopupBridge.newInstance(cordova.getActivity(), (WebView) webView.getEngine().getView());
-        // new PopupBridgeClient((FragmentActivity) cordova.getActivity(), (WebView) webView.getEngine().getView(), "com.ahl.eventcinemas");
+        // PopupBridge.newInstance(cordova.getActivity(), (WebView) webView.getEngine().getView());
+        mPopupBridgeClient = new PopupBridgeClient(
+            (FragmentActivity) cordova.getActivity(),
+            (WebView) webView.getEngine().getView(),
+            "<applicationId>.popupbridge" // Replace with actual applicationId
+        );
     }
+
+    @Override
+    public void onResume(boolean multitasking) {
+        super.onResume(multitasking);
+
+        // call 'deliverResult' in onResume to capture a pending result
+        mPopupBridgeClient.deliverPopupBridgeResult((FragmentActivity) this.cordova.getActivity());
+    }
+
+    // public void showDialog(String message) {
+    //     new AlertDialog.Builder(this)
+    //         .setMessage(message)
+    //         .setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss())
+    //         .show();
+    // }
 
     /**
      * Executes the request and returns PluginResult.
