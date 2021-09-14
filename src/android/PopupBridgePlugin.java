@@ -18,8 +18,6 @@
 */
 package org.apache.cordova.popupbridge;
 
-import java.util.TimeZone;
-
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -28,13 +26,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-// import android.app.AlertDialog;
+import android.app.AlertDialog;
+import android.webkit.WebView;
+import androidx.fragment.app.FragmentActivity;
 
 // import com.braintreepayments.popupbridge.PopupBridge;
 import com.braintreepayments.api.PopupBridgeClient;
-import android.provider.Settings;
-import android.webkit.WebView;
-import androidx.fragment.app.FragmentActivity;
+
 
 public class PopupBridgePlugin extends CordovaPlugin {
     public static final String TAG = "PopupBridge";
@@ -60,8 +58,11 @@ public class PopupBridgePlugin extends CordovaPlugin {
         mPopupBridgeClient = new PopupBridgeClient(
             (FragmentActivity) cordova.getActivity(),
             (WebView) webView.getEngine().getView(),
-            "<applicationId>.popupbridge" // Replace with actual applicationId
+            cordova.getActivity().getPackageName() + ".popupbridge"
         );
+
+        // register error listener
+        mPopupBridgeClient.setErrorListener(error -> showDialog(error.getMessage()));
     }
 
     @Override
@@ -72,12 +73,12 @@ public class PopupBridgePlugin extends CordovaPlugin {
         mPopupBridgeClient.deliverPopupBridgeResult((FragmentActivity) this.cordova.getActivity());
     }
 
-    // public void showDialog(String message) {
-    //     new AlertDialog.Builder(this)
-    //         .setMessage(message)
-    //         .setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss())
-    //         .show();
-    // }
+    public void showDialog(String message) {
+        new AlertDialog.Builder((FragmentActivity) this.cordova.getActivity())
+            .setMessage(message)
+            .setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss())
+            .show();
+    }
 
     /**
      * Executes the request and returns PluginResult.
