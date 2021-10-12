@@ -30,12 +30,11 @@ import android.app.AlertDialog;
 import android.webkit.WebView;
 import androidx.fragment.app.FragmentActivity;
 
-// import com.braintreepayments.popupbridge.PopupBridge;
 import com.braintreepayments.api.PopupBridgeClient;
 
 
 public class PopupBridgePlugin extends CordovaPlugin {
-    public static final String TAG = "PopupBridge";
+    public static final String TAG = "PopupBridgeCordovaPlugin";
     private PopupBridgeClient mPopupBridgeClient;
 
     /**
@@ -54,23 +53,26 @@ public class PopupBridgePlugin extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
 
-        // PopupBridge.newInstance(cordova.getActivity(), (WebView) webView.getEngine().getView());
-        mPopupBridgeClient = new PopupBridgeClient(
-            (FragmentActivity) cordova.getActivity(),
-            (WebView) webView.getEngine().getView(),
-            cordova.getActivity().getPackageName() + ".popupbridge"
-        );
+        if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.P) {
+            mPopupBridgeClient = new PopupBridgeClient(
+                (FragmentActivity) cordova.getActivity(),
+                (WebView) webView.getEngine().getView(),
+                cordova.getActivity().getPackageName() + ".popupbridge"
+            );
 
-        // register error listener
-        mPopupBridgeClient.setErrorListener(error -> showDialog(error.getMessage()));
+            // register error listener
+            mPopupBridgeClient.setErrorListener(error -> showDialog(error.getMessage()));
+        }
     }
 
     @Override
     public void onResume(boolean multitasking) {
         super.onResume(multitasking);
 
-        // call 'deliverResult' in onResume to capture a pending result
-        mPopupBridgeClient.deliverPopupBridgeResult((FragmentActivity) this.cordova.getActivity());
+        if (mPopupBridgeClient != null) {
+            // call 'deliverResult' in onResume to capture a pending result
+            mPopupBridgeClient.deliverPopupBridgeResult((FragmentActivity) this.cordova.getActivity());
+        }
     }
 
     public void showDialog(String message) {

@@ -19,19 +19,14 @@
 
 package <%PACKAGE_NAME%>;
 
-// import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-// import android.webkit.WebView;
 
 import org.apache.cordova.*;
-
-// import com.braintreepayments.api.PopupBridgeClient;
 
 
 public class MainActivity extends CordovaActivity
 {
-    // private PopupBridgeClient mPopupBridgeClient;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -46,38 +41,12 @@ public class MainActivity extends CordovaActivity
 
         // Set by <content src="index.html" /> in config.xml
         loadUrl(launchUrl);
-
-        // mPopupBridgeClient = new PopupBridgeClient(
-        //     this,
-        //     (WebView) this.appView.getEngine().getView(),
-        //     this.getPackageName() + ".popupbridge"
-        // );
-
-
-        // // register error listener
-        // mPopupBridgeClient.setErrorListener(error -> showDialog(error.getMessage()));
     }
-
-
-    // @Override
-    // public void onResume() {
-    //     super.onResume();
-
-    //     // call 'deliverResult' in onResume to capture a pending result
-    //     mPopupBridgeClient.deliverPopupBridgeResult(this);
-    // }
 
     @Override
     protected void onNewIntent(Intent newIntent) {
         super.onNewIntent(newIntent);
         setIntent(newIntent);
     }
-
-    // public void showDialog(String message) {
-    //     new AlertDialog.Builder(this)
-    //         .setMessage(message)
-    //         .setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss())
-    //         .show();
-    // }
 
 }

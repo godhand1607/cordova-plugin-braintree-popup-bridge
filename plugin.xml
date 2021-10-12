@@ -44,27 +44,12 @@
         </config-file>
 
         <source-file src="src/android/PopupBridgePlugin.java" target-dir="src/org/apache/cordova/popupbridge" />
-        <!-- <source-file src="src/android/PopupBridgeActivity.java" target-dir="src/org/apache/cordova/popupbridge" /> -->
 
         <config-file target="config.xml" parent="/*">
             <preference name="android-minSdkVersion" value="21" tools:overrideLibrary="com.braintreepayments.popupbridge" />
         </config-file>
 
-        <!-- <framework src="com.braintreepayments:popup-bridge:1.+" /> -->
         <framework src="com.braintreepayments.api:popup-bridge:4.0.1" />
-
-        <!-- <config-file target="AndroidManifest.xml" parent="application">
-            <activity android:name="org.apache.cordova.popupbridge.PopupBridgeActivity"
-                    android:launchMode="singleTask"
-                    android:exported="true">
-                <intent-filter>
-                    <action android:name="android.intent.action.VIEW" />
-                    <category android:name="android.intent.category.DEFAULT" />
-                    <category android:name="android.intent.category.BROWSABLE" />
-                    <data android:scheme="${applicationId}.popupbridge" />
-                </intent-filter>
-            </activity>
-        </config-file> -->
 
         <hook type="after_prepare" src="hooks/android/override_main_activity.js" />
 
