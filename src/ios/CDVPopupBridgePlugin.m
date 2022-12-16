@@ -22,7 +22,7 @@
 #import <Cordova/CDV.h>
 #import "CDVPopupBridgePlugin.h"
 
-#import "POPPopupBridge.h"
+#import <PopupBridge/POPPopupBridge.h>
 
 @interface CDVPopupBridgePlugin () <POPPopupBridgeDelegate>
     @property (nonatomic, strong) POPPopupBridge *popupBridge;

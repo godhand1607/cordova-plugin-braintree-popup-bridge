@@ -22,7 +22,7 @@
     xmlns:rim="http://www.blackberry.com/ns/widgets"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="cordova-plugin-braintree-popup-bridge"
-    version="2.1">
+    version="2.2">
     <name>Braintree PopupBridge Plugin</name>
     <description>Cordova Braintree PopupBridge</description>
     <license>Apache 2.0</license>
@@ -82,15 +82,17 @@
         <header-file src="src/ios/CDVPopupBridgePlugin.h" />
         <source-file src="src/ios/CDVPopupBridgePlugin.m" />
 
-
-        <!-- Popup Bridge -->
         <header-file src="src/ios/AppDelegate+PopupBridge.h" />
         <source-file src="src/ios/AppDelegate+PopupBridge.m" />
 
-        <header-file src="src/ios/POPPopUpBridge.h" />
-        <source-file src="src/ios/POPPopUpBridge.m" />
-        <header-file src="src/ios/POPWeakScriptMessageDelegate.h" />
-        <source-file src="src/ios/POPWeakScriptMessageDelegate.m" />
+        <podspec>
+            <config>
+                <source url="https://cdn.cocoapods.org/" />
+            </config>
+            <pods>
+                <pod name="PopupBridge" spec="1.2.0" />
+            </pods>
+        </podspec>
 
         <config-file target="*-Info.plist" parent="CFBundleURLTypes">
             <array>

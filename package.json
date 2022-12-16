@@ -1,6 +1,6 @@
 {
     "name": "cordova-plugin-braintree-popup-bridge",
-    "version": "2.1",
+    "version": "2.2",
     "description": "Cordova Braintree PopupBridge",
     "cordova": {
       "id": "cordova-plugin-braintree-popup-bridge",
